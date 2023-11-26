@@ -68,8 +68,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assignement\BasicCalculator.aspx" />
+    <Content Include="Assignement\Login.aspx" />
     <Content Include="CSS\bootstrap\css\bootstrap.css" />
     <Content Include="CSS\bootstrap\js\bootstrap.min.js" />
+    <Content Include="EmployeeContainer\LoginForm.aspx" />
     <Content Include="EmployeeContainer\NewEmployee.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -80,6 +82,20 @@
     </Compile>
     <Compile Include="Assignement\BasicCalculator.aspx.designer.cs">
       <DependentUpon>BasicCalculator.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Assignement\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Assignement\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeContainer\LoginForm.aspx.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeContainer\LoginForm.aspx.designer.cs">
+      <DependentUpon>LoginForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="EmployeeContainer\NewEmployee.aspx.cs">
       <DependentUpon>NewEmployee.aspx</DependentUpon>

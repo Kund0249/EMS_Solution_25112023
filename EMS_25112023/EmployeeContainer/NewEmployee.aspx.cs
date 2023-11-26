@@ -16,8 +16,25 @@ namespace EMS_25112023.EmployeeContainer
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            string Name = txtFname.Text;
-            lblname.Text = Name;
+            //code to save data
+            ClearFormCOntrols();
+        }
+
+        protected void btnReset_Click(object sender, EventArgs e)
+        {
+            ClearFormCOntrols();
+        }
+
+        private void ClearFormCOntrols()
+        {
+            txtFname.Text = string.Empty;
+            txtbankaccount.Text = string.Empty;
+            txtrebankaccount.Text = string.Empty;
+            txtMob.Text = string.Empty;
+            txtEmail.Text = string.Empty;
+            txtSalary.Text = string.Empty;
+            txtDoj.Text = string.Empty;
+            rdbGender.ClearSelection();
         }
     }
 }
