@@ -6,91 +6,120 @@
 <head runat="server">
     <title>Add New Employee</title>
     <link href="../CSS/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="../CSS/toastr/toastr.css" rel="stylesheet" />
 
+    <script src="../CSS/jquery/jquery.min.js"></script>
+    <script src="../CSS/toastr/toastr.min.js"></script>
 </head>
 <body>
-    <form id="form1" runat="server">
-        <div class="row">
-            <div class="col-12 bg-primary">
-                <h2 class="text-center">Employee Registration Form</h2>
+    <div class="container-fluid">
+
+        <form id="form1" runat="server">
+            <div class="row">
+                <div class="col-12 bg-primary">
+                    <h2 class="text-center">Employee Registration Form</h2>
+                </div>
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-6 offset-3">
-                <table class="table">
-                    <tr>
-                        <th>Full Name</th>
-                        <td>
-                            <asp:TextBox runat="server" ID="txtFname"
-                                CssClass="form-control"></asp:TextBox>
+            <div class="row">
+                <div class="col-6 offset-3">
+                    <table class="table">
+                        <tr>
+                            <th>Full Name</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtFname"
+                                    CssClass="form-control"></asp:TextBox>
 
-                            <asp:RequiredFieldValidator runat="server"
-                                ControlToValidate="txtFname"
-                                ErrorMessage="Please enter name."
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator runat="server"
+                                    ControlToValidate="txtFname"
+                                    ErrorMessage="Please enter name."
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RequiredFieldValidator>
 
-                            <asp:RegularExpressionValidator runat="server"
-                                ControlToValidate="txtFname"
-                                ErrorMessage="Only alphabest allowed."
-                                ValidationExpression="[a-zA-Z\s]*"
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:RegularExpressionValidator>
+                                <asp:RegularExpressionValidator runat="server"
+                                    ControlToValidate="txtFname"
+                                    ErrorMessage="Only alphabest allowed."
+                                    ValidationExpression="[a-zA-Z\s]*"
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RegularExpressionValidator>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>
-                            <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Contact No.</th>
-                        <td>
-                            <asp:TextBox runat="server" ID="txtMob" CssClass="form-control"></asp:TextBox>
-                         <asp:RequiredFieldValidator runat="server"
-                                ControlToValidate="txtMob"
-                                ErrorMessage="Please enter mobile number."
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Contact No.</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtMob" CssClass="form-control"></asp:TextBox>
+                                <asp:RequiredFieldValidator runat="server"
+                                    ControlToValidate="txtMob"
+                                    ErrorMessage="Please enter mobile number."
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RequiredFieldValidator>
 
-                            <asp:RegularExpressionValidator runat="server"
-                                ControlToValidate="txtMob"
-                                ErrorMessage="invalid mobile number."
-                                ValidationExpression="[6-9]{1}[0-9]{9}"
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:RegularExpressionValidator>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>DOJ</th>
-                        <td>
-                            <asp:TextBox runat="server" ID="txtDoj" TextMode="Date" CssClass="form-control"></asp:TextBox>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Gender</th>
-                        <td>
-                           <asp:RadioButtonList runat="server" ID="rdbGender"
-                               RepeatDirection="Horizontal">
-                               <asp:ListItem Value="M">Male</asp:ListItem>
-                               <asp:ListItem Value="F">Female</asp:ListItem>
-                           </asp:RadioButtonList>
-                            <asp:RequiredFieldValidator runat="server"
-                                ControlToValidate="rdbGender"
-                                ErrorMessage="Please select gender."
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:RequiredFieldValidator>
-                        </td>
-                    </tr>
-                   <%-- <tr>
+                                <asp:RegularExpressionValidator runat="server"
+                                    ControlToValidate="txtMob"
+                                    ErrorMessage="invalid mobile number."
+                                    ValidationExpression="[6-9]{1}[0-9]{9}"
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RegularExpressionValidator>
+                            </td>
+                        </tr>
+
+                          <tr>
+                            <th>Department</th>
+                            <td>
+                                <asp:DropDownList runat="server" ID="ddlDepartment" 
+                                    CssClass="form-control"
+                                    DataValueField="DepartmentId"
+                                    DataTextField="DepartmentName">
+                                   <%--  <asp:ListItem Value="-1">Select Department</asp:ListItem>
+                                     <asp:ListItem Value="1">Department Manager</asp:ListItem>
+                                     <asp:ListItem Value="2">Finance & Account</asp:ListItem>
+                                     <asp:ListItem Value="3">Brokerage Managert</asp:ListItem>
+                                     <asp:ListItem Value="4">System ADMIN</asp:ListItem>--%>
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator runat="server"
+                                    ControlToValidate="ddlDepartment"
+                                    ErrorMessage="Please select department."
+                                    InitialValue="-1"
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>DOJ</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtDoj" TextMode="Date" CssClass="form-control"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td>
+                                <asp:RadioButtonList runat="server" ID="rdbGender"
+                                    RepeatDirection="Horizontal">
+                                    <asp:ListItem Value="M">Male</asp:ListItem>
+                                    <asp:ListItem Value="F">Female</asp:ListItem>
+                                </asp:RadioButtonList>
+                                <asp:RequiredFieldValidator runat="server"
+                                    ControlToValidate="rdbGender"
+                                    ErrorMessage="Please select gender."
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RequiredFieldValidator>
+                            </td>
+                        </tr>
+                        <%-- <tr>
                         <th>Skills</th>
                         <td>
                             <asp:CheckBoxList runat="server" ID="chkSkils"
@@ -108,93 +137,95 @@
                         </td>
                     </tr>--%>
 
-                    <tr>
-                        <th>Salary</th>
-                        <td>
-                            <asp:TextBox runat="server" ID="txtSalary"
-                                CssClass="form-control">
-                            </asp:TextBox>
-                              <asp:RequiredFieldValidator runat="server"
-                                ControlToValidate="txtSalary"
-                                ErrorMessage="Please enter salary number."
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:RequiredFieldValidator>
-                            <asp:RangeValidator runat="server"
-                                ControlToValidate="txtSalary"
-                                ErrorMessage="Salary must be in between 10000 to 100000"
-                                MinimumValue="10000"
-                                MaximumValue="100000"
-                                Type="Integer"
-                                Display="Dynamic"
-                                ForeColor="Red">
-                            </asp:RangeValidator>
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>Salary</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtSalary"
+                                    CssClass="form-control">
+                                </asp:TextBox>
+                                <asp:RequiredFieldValidator runat="server"
+                                    ControlToValidate="txtSalary"
+                                    ErrorMessage="Please enter salary number."
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RequiredFieldValidator>
+                                <asp:RangeValidator runat="server"
+                                    ControlToValidate="txtSalary"
+                                    ErrorMessage="Salary must be in between 10000 to 100000"
+                                    MinimumValue="10000"
+                                    MaximumValue="100000"
+                                    Type="Integer"
+                                    Display="Dynamic"
+                                    ForeColor="Red">
+                                </asp:RangeValidator>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>Bank Account</th>
-                        <td>
-                            <asp:TextBox runat="server" 
-                                ID="txtbankaccount" CssClass="form-control"
-                                TextMode="Password">
+                        <tr>
+                            <th>Bank Account</th>
+                            <td>
+                                <asp:TextBox runat="server"
+                                    ID="txtbankaccount" CssClass="form-control"
+                                    TextMode="Password">
 
-                            </asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server"
-                                ControlToValidate="txtbankaccount"
-                                ErrorMessage="Please enter bank account number."
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:RequiredFieldValidator>
+                                </asp:TextBox>
+                                <asp:RequiredFieldValidator runat="server"
+                                    ControlToValidate="txtbankaccount"
+                                    ErrorMessage="Please enter bank account number."
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RequiredFieldValidator>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
-                     <tr>
-                        <th>Confirm Bank Account</th>
-                        <td>
-                            <asp:TextBox runat="server" ID="txtrebankaccount" 
-                                CssClass="form-control"
-                                TextMode="Password">
-                            </asp:TextBox>
-                            <asp:RequiredFieldValidator runat="server"
-                                ControlToValidate="txtrebankaccount"
-                                ErrorMessage="Please enter bank account number."
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:RequiredFieldValidator>
-                            <asp:CompareValidator runat="server"
-                                ControlToValidate="txtrebankaccount"
-                                ControlToCompare="txtbankaccount"
-                                ErrorMessage="bank account number does not match."
-                                ForeColor="Red"
-                                Display="Dynamic">
-                            </asp:CompareValidator>
+                        <tr>
+                            <th>Confirm Bank Account</th>
+                            <td>
+                                <asp:TextBox runat="server" ID="txtrebankaccount"
+                                    CssClass="form-control"
+                                    TextMode="Password">
+                                </asp:TextBox>
+                                <asp:RequiredFieldValidator runat="server"
+                                    ControlToValidate="txtrebankaccount"
+                                    ErrorMessage="Please enter bank account number."
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:RequiredFieldValidator>
+                                <asp:CompareValidator runat="server"
+                                    ControlToValidate="txtrebankaccount"
+                                    ControlToCompare="txtbankaccount"
+                                    ErrorMessage="bank account number does not match."
+                                    ForeColor="Red"
+                                    Display="Dynamic">
+                                </asp:CompareValidator>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <asp:Button runat="server" ID="btnSubmit" Text="Submit"
-                                CssClass="btn btn-success"
-                                OnClick="btnSubmit_Click" />
-                        </td>
-                        <td>
-                            <asp:Button runat="server" 
-                                ID="btnReset" Text="Reset" CssClass="btn btn-danger" 
-                                CausesValidation="false"
-                                OnClick="btnReset_Click"/>
-                        </td>
-                    </tr>
-                </table>
+                        <tr>
+                            <td>
+                                <asp:Button runat="server" ID="btnSubmit" Text="Submit"
+                                    CssClass="btn btn-success"
+                                    OnClick="btnSubmit_Click" />
+                            </td>
+                            <td>
+                                <asp:Button runat="server"
+                                    ID="btnReset" Text="Reset" CssClass="btn btn-danger"
+                                    CausesValidation="false"
+                                    OnClick="btnReset_Click" />
+                            </td>
+                        </tr>
+                    </table>
 
-                <asp:Label runat="server" ID="lblname"></asp:Label>
+                    <asp:Label runat="server" ID="lblname"></asp:Label>
+                </div>
             </div>
-        </div>
 
 
 
-    </form>
+        </form>
+
+    </div>
 </body>
 </html>

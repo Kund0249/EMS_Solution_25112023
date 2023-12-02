@@ -71,8 +71,13 @@
     <Content Include="Assignement\Login.aspx" />
     <Content Include="CSS\bootstrap\css\bootstrap.css" />
     <Content Include="CSS\bootstrap\js\bootstrap.min.js" />
+    <Content Include="CSS\jquery\jquery.min.js" />
+    <Content Include="CSS\toastr\toastr.css" />
+    <Content Include="CSS\toastr\toastr.min.js" />
     <Content Include="EmployeeContainer\LoginForm.aspx" />
     <Content Include="EmployeeContainer\NewEmployee.aspx" />
+    <Content Include="StyleCSS\css\bootstrap.css" />
+    <Content Include="StyleCSS\js\bootstrap.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
