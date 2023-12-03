@@ -26,14 +26,24 @@ namespace EMS_25112023.EmployeeContainer
             SqlConnection connection = new SqlConnection(CS);
 
             //Step-2 : Specify the command and command type
-            string Query = string.Format("Insert into TEMPLOYEE " +
-                "Values('{0}',{1},'{2}','{3}'," +
-                "'{4}','{5}',{6},'{7}')", txtFname.Text, ddlDepartment.SelectedValue,
-                rdbGender.SelectedValue, txtMob.Text, txtDoj.Text, txtEmail.Text,
-                txtSalary.Text, txtbankaccount.Text);
+            //string Query = string.Format("Insert into TEMPLOYEE " +
+            //    "Values('{0}',{1},'{2}','{3}'," +
+            //    "'{4}','{5}',{6},'{7}')", txtFname.Text, ddlDepartment.SelectedValue,
+            //    rdbGender.SelectedValue, txtMob.Text, txtDoj.Text, txtEmail.Text,
+            //    txtSalary.Text, txtbankaccount.Text);
 
-            SqlCommand command = new SqlCommand(Query, connection);
-            command.CommandType = System.Data.CommandType.Text;
+            SqlCommand command = new SqlCommand("spAddEmployee", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
+
+            command.Parameters.Add(new SqlParameter("@Name",txtFname.Text));
+            command.Parameters.AddWithValue("@DepartmentId", ddlDepartment.SelectedValue);
+            command.Parameters.AddWithValue("@Gender", rdbGender.SelectedValue);
+            command.Parameters.AddWithValue("@ContactNo",txtMob.Text);
+            command.Parameters.AddWithValue("@DOJ",txtDoj.Text);
+            command.Parameters.AddWithValue("@EmailAddress",txtEmail.Text);
+            command.Parameters.AddWithValue("@Salary", txtSalary.Text);
+            command.Parameters.AddWithValue("@BankAccount", txtbankaccount.Text);
+
 
             //Step-3 : Open the connection,Execute Command and Close the connection
             connection.Open();
@@ -76,10 +86,8 @@ namespace EMS_25112023.EmployeeContainer
             SqlConnection connection = new SqlConnection(CS);
 
             //Step-2 : Specify the command and command type
-            string Query = string.Format("Select DepartmentId,DepartmentName from TDEPARTMENT");
-
-            SqlCommand command = new SqlCommand(Query, connection);
-            command.CommandType = System.Data.CommandType.Text;
+            SqlCommand command = new SqlCommand("spGetAllDepartments", connection);
+            command.CommandType = System.Data.CommandType.StoredProcedure;
 
             //Step-3 : Open the connection,Execute Command and Close the connection
             connection.Open();
