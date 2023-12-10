@@ -78,6 +78,7 @@
     <Content Include="EmployeeContainer\Employees.aspx" />
     <Content Include="EmployeeContainer\LoginForm.aspx" />
     <Content Include="EmployeeContainer\NewEmployee.aspx" />
+    <Content Include="EmployeeContainer\Test.aspx" />
     <Content Include="StyleCSS\css\bootstrap.css" />
     <Content Include="StyleCSS\js\bootstrap.min.js" />
     <Content Include="Web.config" />
@@ -125,10 +126,25 @@
     <Compile Include="EmployeeContainer\NewEmployee.aspx.designer.cs">
       <DependentUpon>NewEmployee.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeContainer\Test.aspx.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EmployeeContainer\Test.aspx.designer.cs">
+      <DependentUpon>Test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Layouts\Employee_Layout.Master.cs">
+      <DependentUpon>Employee_Layout.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Layouts\Employee_Layout.Master.designer.cs">
+      <DependentUpon>Employee_Layout.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="libman.json" />
+    <Content Include="Layouts\Employee_Layout.Master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

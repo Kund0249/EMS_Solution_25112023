@@ -1,18 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="NewEmployee.aspx.cs" Inherits="EMS_25112023.EmployeeContainer.NewEmployee" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" 
+    CodeBehind="NewEmployee.aspx.cs" 
+    Inherits="EMS_25112023.EmployeeContainer.NewEmployee" 
+    MasterPageFile="~/Layouts/Employee_Layout.Master" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title>Add New Employee</title>
-    <link href="../CSS/bootstrap/css/bootstrap.css" rel="stylesheet" />
-    <link href="../CSS/toastr/toastr.css" rel="stylesheet" />
-
-    <script src="../CSS/jquery/jquery.min.js"></script>
-    <script src="../CSS/toastr/toastr.min.js"></script>
-</head>
-<body>
-    <div class="container-fluid">
+<asp:Content ContentPlaceHolderID="ChildPage" runat="server">
 
         <form id="form1" runat="server">
             <div class="row">
@@ -226,6 +218,4 @@
 
         </form>
 
-    </div>
-</body>
-</html>
+ </asp:Content>
