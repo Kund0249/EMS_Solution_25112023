@@ -1,0 +1,50 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="_AppLayout.master.cs" Inherits="EMS_25112023.Layouts._AppLayout" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link href="../CSS/bootstrap/css/bootstrap.css" rel="stylesheet" />
+
+    <asp:ContentPlaceHolder ID="HeadSection" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <%-- ---------------------Menu-----------------------%>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <asp:HyperLink
+                            runat="server"
+                            CssClass="nav-link" 
+                            NavigateUrl="~/DepartmentContainer/AddDepartment.aspx"
+                            Text="Department">
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <asp:HyperLink
+                            runat="server"
+                            CssClass="nav-link" 
+                            NavigateUrl="~/EmployeeContainer/Employees.aspx"
+                            Text="Employee">
+                        </asp:HyperLink>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <%-- ---------------------Content Page----------------%>
+    <div class="container-fluid">
+        <asp:ContentPlaceHolder ID="childpages" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <%-- ---------------------Footer----------------------%>
+</body>
+</html>
