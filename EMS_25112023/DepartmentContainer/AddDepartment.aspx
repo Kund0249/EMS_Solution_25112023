@@ -14,6 +14,7 @@
 
     <form id="form1" runat="server">
         <div class="container-fluid">
+            <asp:HiddenField runat="server" ID="hdfDeptId" />
             <div class="row">
                 <div class="col-6 offset-3">
                     <table class="table">
@@ -61,7 +62,8 @@
                                     CssClass="btn btn-primary" OnClick="btnSubmit_Click" />
                             </td>
                             <td>
-                                <asp:Button runat="server" ID="btnReset" Text="Save"
+                                <asp:Button runat="server" ID="btnReset" Text="Reset"
+                                    CausesValidation="false"
                                     CssClass="btn btn-danger" OnClick="btnReset_Click" />
                             </td>
                         </tr>
@@ -77,6 +79,7 @@
                         EmptyDataText="No Data!"
                         CssClass="table"
                         OnRowDeleting="GridDepartment_RowDeleting"
+                        OnSelectedIndexChanged="GridDepartment_SelectedIndexChanged"
                         DataKeyNames="Id">
                         <Columns>
                             <asp:BoundField HeaderText="Department Code" DataField="DeptCode" />
@@ -90,7 +93,7 @@
                                             CausesValidation="false" />
 
                                         <asp:Button runat="server"
-                                            Text="Edit" CommandName="edit"
+                                            Text="Edit" CommandName="select"
                                             CssClass="btn btn-sm btn-primary"
                                             CausesValidation="false" />
                                     </div>
