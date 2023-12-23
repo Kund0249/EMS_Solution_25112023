@@ -67,6 +67,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\Member.aspx" />
     <Content Include="Assignement\BasicCalculator.aspx" />
     <Content Include="Assignement\Login.aspx" />
     <Content Include="CSS\bootstrap\css\bootstrap.css" />
@@ -74,6 +75,7 @@
     <Content Include="CSS\jquery\jquery.min.js" />
     <Content Include="CSS\toastr\toastr.css" />
     <Content Include="CSS\toastr\toastr.min.js" />
+    <Content Include="Default.aspx" />
     <Content Include="DepartmentContainer\AddDepartment.aspx" />
     <Content Include="EmployeeContainer\EditEmployee.aspx" />
     <Content Include="EmployeeContainer\Employees.aspx" />
@@ -85,6 +87,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account\Member.aspx.cs">
+      <DependentUpon>Member.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Account\Member.aspx.designer.cs">
+      <DependentUpon>Member.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Assignement\BasicCalculator.aspx.cs">
       <DependentUpon>BasicCalculator.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -98,6 +107,13 @@
     </Compile>
     <Compile Include="Assignement\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="DepartmentContainer\AddDepartment.aspx.cs">
       <DependentUpon>AddDepartment.aspx</DependentUpon>
@@ -170,7 +186,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Account\" />
     <Folder Include="Admin\" />
   </ItemGroup>
   <PropertyGroup>
