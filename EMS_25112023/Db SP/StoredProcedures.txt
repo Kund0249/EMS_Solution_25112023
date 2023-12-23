@@ -1,0 +1,368 @@
+﻿USE [Assignement10112023]
+GO
+/****** Object:  StoredProcedure [dbo].[spUpdateDepartment]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[spUpdateDepartment]
+@DeptId int,
+@DeptCode varchar(6),
+@DeptName varchar(20)
+AS
+BEGIN
+
+IF NOT EXISTS(select 1 from 
+              TDEPARTMENT 
+               where (DepartmentCode = @DeptCode or DepartmentName = @DeptName) and DepartmentId != @DeptId)
+	BEGIN
+		Update TDEPARTMENT
+	    Set DepartmentCode = @DeptCode,DepartmentName = @DeptName
+	    Where DepartmentId = @DeptId
+		select 'U001' as StatusCode
+		return
+	END
+Else
+  BEGIN
+    select 'RE01' as StatusCode
+    return
+  END
+
+END
+
+select * from TDEPARTMENT
+GO
+/****** Object:  StoredProcedure [dbo].[spRemoveDepartment]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create proc [dbo].[spRemoveDepartment]
+@DepartmentId int
+AS
+BEGIN
+IF NOT EXISTS(select 1 from TDEPARTMENT where DepartmentId = @DepartmentId)
+	BEGIN
+		select 'RN01' as StatusCode
+		return
+	END
+Else
+  BEGIN
+    delete from TDEPARTMENT where DepartmentId = @DepartmentId
+    select 'S001' as StatusCode
+    return
+  END 
+END
+
+--delete from TDEPARTMENT where DepartmentId > 4
+GO
+/****** Object:  StoredProcedure [dbo].[spInsertDepartment]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[spInsertDepartment]
+@DeptCode varchar(6),
+@DeptName varchar(20)
+AS
+BEGIN
+
+IF NOT EXISTS(select 1 from TDEPARTMENT where DepartmentCode = @DeptCode or DepartmentName = @DeptName)
+	BEGIN
+		Insert into TDEPARTMENT
+	   (DepartmentCode,DepartmentName)
+		Values(@DeptCode,@DeptName)
+		select 'S001' as StatusCode
+		return
+	END
+Else
+  BEGIN
+    select 'RE01' as StatusCode
+    return
+  END
+
+END
+
+select * from TDEPARTMENT
+GO
+/****** Object:  StoredProcedure [dbo].[spValidateUser]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[spValidateUser]
+@UserId varchar(20),
+@Password varchar(12)
+AS
+BEGIN
+  IF EXISTS(select * from TMEMBER Where UserId = @UserId and [Password] = @Password)
+  BEGIN
+    Select 'V001' as StatusMessage
+    Return;
+  END
+  ELSE
+  BEGIN
+   Select 'F001' as StatusMessage
+    Return;
+  END
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spGetAllDepartments]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[spGetAllDepartments]
+AS
+BEGIN
+  --select -1 as DepartmentId, 'Select Department' as DepartmentName
+  --Union
+  Select DepartmentId,DepartmentName from TDEPARTMENT
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spGetAllDepartmentList]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[spGetAllDepartmentList]
+AS
+BEGIN
+ Select DepartmentId as Id,DepartmentCode as DeptCode,DepartmentName as DeptName from TDEPARTMENT
+ 
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spGetDepartmentList]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[spGetDepartmentList]
+AS
+BEGIN
+select DepartmentId,DepartmentName from TDEPARTMENT
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spGetDepartmentById]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create proc [dbo].[spGetDepartmentById]
+@DeptId int
+AS
+BEGIN
+ Select DepartmentId as Id,DepartmentCode as DeptCode,DepartmentName as DeptName 
+ from TDEPARTMENT
+ where DepartmentId = @DeptId
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spGetAllEmployee16122023]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[spGetAllEmployee16122023]
+@gender varchar(1)= null
+AS
+BEGIN
+ Select * From TEMPLOYEE where (@gender is null or Gender = @gender)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spGetAllEmployee]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[spGetAllEmployee]
+AS
+BEGIN
+  Select EMP.EmployeeId,EMP.Name,EMP.Gender,EMP.ContactNo,Convert(varchar,EMP.DOJ,106) as DOJ,
+  ISNULL(EMP.EmailAddress,'') as EmailAddress,
+  ISNULL(EMP.Salary,0) as Salary,
+  ISNULL(EMP.BankAccountNo,'NA') as BankAccount,
+  DEP.DepartmentName as Department,
+  '../ProfileImages/' + ISNULL(EMP.ProfileImage,'') as ProfileImage
+   from TEMPLOYEE EMP
+   Inner Join TDEPARTMENT DEP on EMP.DepartmentId = DEP.DepartmentId
+  
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spDeleteEmployee]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create proc [dbo].[spDeleteEmployee]
+@EmpId int
+AS
+BEGIN
+ Delete from TEMPLOYEE where EmployeeId = @EmpId
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spAddEmployee]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Proc [dbo].[spAddEmployee]
+@Name Varchar(50),
+@departmentId int,
+@Gender Varchar(6),
+@ContactNo Varchar(10),
+@DOJ Datetime,
+@EmailAddress Varchar(50),
+@Salary int,
+@BankAccount Varchar(20),
+@ProfileImage varchar(500) = null
+AS
+BEGIN
+  Insert into TEMPLOYEE
+  (Name,DepartmentId,Gender,ContactNo,DOJ,EmailAddress,Salary,BankAccountNo,ProfileImage)
+  Values(@Name,@departmentId,@Gender,@ContactNo,@DOJ,@EmailAddress,@Salary,@BankAccount,@ProfileImage)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spUpdateEmployee]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create Proc [dbo].[spUpdateEmployee]
+@EmpId int,
+@Name Varchar(50),
+@departmentId int,
+@Gender Varchar(6),
+@ContactNo Varchar(10),
+@DOJ Datetime,
+@EmailAddress Varchar(50),
+@Salary int,
+@BankAccount Varchar(20),
+@ProfileImage varchar(500) = null
+AS
+BEGIN
+  
+  UPDATE TEMPLOYEE
+  Set Name = @Name,
+  DepartmentId = @departmentId,
+  Gender = @Gender,
+  ContactNo = @ContactNo,
+  DOJ = @DOJ,
+  EmailAddress=@EmailAddress,
+  Salary = @Salary,
+  BankAccountNo = @BankAccount
+  Where EmployeeId = @EmpId
+  --Insert into TEMPLOYEE
+  --(Name,DepartmentId,Gender,ContactNo,DOJ,EmailAddress,Salary,BankAccountNo,ProfileImage)
+  --Values(@Name,@departmentId,@Gender,@ContactNo,@DOJ,@EmailAddress,@Salary,@BankAccount,@ProfileImage)
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spGetEmployeeById]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create proc [dbo].[spGetEmployeeById]
+@EmpId int
+AS
+BEGIN
+ Select * from TEMPLOYEE where EmployeeId = @EmpId
+END
+GO
+/****** Object:  StoredProcedure [dbo].[spManageEmployeeData]    Script Date: 12/23/2023 13:01:54 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE Procedure [dbo].[spManageEmployeeData]
+@ActionFlag varchar(1),
+--Employee Details-----
+@EmployeeId int = null,
+@EmployeeName varchar(50) = null,
+@DepartmentId int = null,
+@Gender varchar(2) = null,
+@ContactNo varchar(10) = null,
+@DOJ datetime = null,
+-----Address Details-----
+@AddressLine1 varchar(50) = null,
+@AddressLine2 varchar(50) = null,
+@State varchar(20) = null,
+@City varchar(20) = null,
+@PinCode varchar(10) = null,
+@LandMark varchar(20) = null
+AS
+BEGIN
+
+BEGIN TRANSACTION
+BEGIN TRY
+  IF @ActionFlag = 'R'
+   BEGIN
+    Select
+	EMP.EMployeeId, 
+	EMP.Name,EMP.Gender,EMP.ContactNo,EMP.DOJ,DEP.DepartmentName,
+	(ADR.AddressLine1 + '.' + ISNULL(ADR.AddressLine2,'') + ',' + ADR.City + ',' + ADR.[State]
+	 + '-' +ADR.PinCode + '. Land Mark : ' + ISNULL(ADR.LandMark,'NA') ) as [Address] 
+	From TEMPLOYEE EMP
+	INNER JOIN TDEPARTMENT DEP on EMP.DepartmentId = DEP.DepartmentId
+	INNER JOIN TADDRESS ADR on EMP.EmployeeId = ADR.EmployeeId
+   END
+   
+   IF @ActionFlag = 'I' 
+    BEGIN
+      INSERT into TEMPLOYEE (Name,DepartmentId,Gender,ContactNo,DOJ)
+      Values(@EmployeeName,@DepartmentId,@Gender,@ContactNo,@DOJ)
+      
+      DECLARE @EmpId int;
+      SET @EmpID = @@IDENTITY;
+      
+      Insert into TADDRESS (EmployeeId,AddressLine1,AddressLine2,[State],City,PinCode,LandMark)
+      Values(@EmpID,@AddressLine1,@AddressLine2,@State,@City,@PinCode,@LandMark)
+    END
+    
+     IF @ActionFlag = 'D' 
+    BEGIN
+     Delete from TADDRESS Where EmployeeId = @EmployeeId
+     Delete from TEMPLOYEE Where EmployeeId = @EmployeeId
+    END
+    
+    IF @ActionFlag = 'G' 
+    BEGIN
+    Select
+	EMP.EMployeeId, 
+	EMP.Name,EMP.Gender,EMP.ContactNo,EMP.DOJ,EMP.DepartmentId,
+	ADR.AddressLine1,ADR.AddressLine2,ADR.City,ADR.[State],ADR.PinCode,ADR.LandMark
+	From TEMPLOYEE EMP
+	INNER JOIN TADDRESS ADR on EMP.EmployeeId = ADR.EmployeeId
+	Where EMP.EmployeeId = @EmployeeId
+    END
+    
+      IF @ActionFlag = 'U' 
+    BEGIN
+    
+    UPDATE TEMPLOYEE
+    SET Name = @EmployeeName,
+    Gender = @Gender,
+    DepartmentId = @DepartmentId,
+    ContactNo = @ContactNo,
+    DOJ = @DOJ
+	Where EmployeeId = @EmployeeId
+	
+	UPDATE TADDRESS
+    SET AddressLine1 = @AddressLine1,
+    AddressLine2 = @AddressLine2,
+    [State] = @State,
+    City = @City,
+    PinCode = @PinCode,
+    LandMark = @LandMark
+	Where EmployeeId = @EmployeeId
+    END
+   
+   
+   COMMIT;
+END TRY
+
+BEGIN CATCH
+    ROLLBACK;
+END CATCH
+
+END
+GO

@@ -75,6 +75,7 @@
     <Content Include="CSS\jquery\jquery.min.js" />
     <Content Include="CSS\toastr\toastr.css" />
     <Content Include="CSS\toastr\toastr.min.js" />
+    <Content Include="Db SP\StoredProcedures.txt" />
     <Content Include="Default.aspx" />
     <Content Include="DepartmentContainer\AddDepartment.aspx" />
     <Content Include="EmployeeContainer\EditEmployee.aspx" />
