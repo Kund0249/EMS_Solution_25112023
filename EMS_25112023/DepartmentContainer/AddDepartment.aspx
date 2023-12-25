@@ -12,7 +12,7 @@
 
 <asp:Content runat="server" ContentPlaceHolderID="ChildPage">
 
-    <form id="form1" runat="server">
+   
         <div class="container-fluid">
             <asp:HiddenField runat="server" ID="hdfDeptId" />
             <div class="row">
@@ -104,6 +104,6 @@
                 </div>
             </div>
         </div>
-    </form>
+ 
 </asp:Content>
 

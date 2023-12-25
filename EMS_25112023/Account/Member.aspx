@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ChildPage" runat="server">
 
-    <form id="form1" runat="server">
+ 
         <div class="container-fluid">
             <div class="row bg-primary">
                 <h2 class="text-center">Welcome to QuickXpert Infotech</h2>
@@ -62,13 +62,13 @@
                                         CssClass="form-control">
                                     </asp:TextBox>
                                 </div>
-                                 <div class="mb-3">
+                                <%-- <div class="mb-3">
                                     <label for="txtUserId" class="form-label">Mobile No.</label>
                                     <asp:TextBox ID="TextBox3"
                                         runat="server"
                                         CssClass="form-control">
                                     </asp:TextBox>
-                                </div>
+                                </div>--%>
                                 <div class="mb-3">
                                     <label for="txtpassword" class="form-label">Password</label>
                                     <asp:TextBox ID="TextBox2"
@@ -79,7 +79,9 @@
                                 </div>
                                  <div class="mb-3">
                                     <asp:Button runat="server" Text="Register" 
-                                        CssClass="btn btn-lg btn-warning"/>
+                                        CssClass="btn btn-lg btn-warning"
+                                        ID="btnRegister"
+                                        OnClick="btnRegister_Click"/>
                                 </div>
                             </div>
                         </div>
@@ -87,5 +89,5 @@
                 </div>
             </div>
         </div>
-    </form>
+  
 </asp:Content>

@@ -83,6 +83,9 @@
     <Content Include="EmployeeContainer\LoginForm.aspx" />
     <Content Include="EmployeeContainer\NewEmployee.aspx" />
     <Content Include="EmployeeContainer\Test.aspx" />
+    <Content Include="ErrorPages\Error.aspx" />
+    <Content Include="ErrorPages\NotFound.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="StyleCSS\css\bootstrap.css" />
     <Content Include="StyleCSS\js\bootstrap.min.js" />
     <Content Include="Web.config" />
@@ -158,6 +161,23 @@
     <Compile Include="EmployeeContainer\Test.aspx.designer.cs">
       <DependentUpon>Test.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ErrorPages\Error.aspx.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\Error.aspx.designer.cs">
+      <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\NotFound.aspx.cs">
+      <DependentUpon>NotFound.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPages\NotFound.aspx.designer.cs">
+      <DependentUpon>NotFound.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="Layouts\Employee_Layout.Master.cs">
       <DependentUpon>Employee_Layout.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -178,6 +198,7 @@
     <Content Include="libman.json" />
     <Content Include="Layouts\Employee_Layout.Master" />
     <Content Include="Layouts\_AppLayout.Master" />
+    <Content Include="ErrorPages\Web.config" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

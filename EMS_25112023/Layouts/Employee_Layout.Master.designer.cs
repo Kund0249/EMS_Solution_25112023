@@ -15,6 +15,15 @@ namespace EMS_25112023.Layouts
     {
 
         /// <summary>
+        /// MasterForm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm MasterForm;
+
+        /// <summary>
         /// ChildPage control.
         /// </summary>
         /// <remarks>

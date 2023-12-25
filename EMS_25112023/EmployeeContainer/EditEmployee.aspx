@@ -5,7 +5,7 @@
 
 
 <asp:Content ContentPlaceHolderID="ChildPage" runat="server">
-    <form id="form1" runat="server">
+   
         <div class="row">
             <div class="col-12 bg-primary">
                 <h2 class="text-center">Employee Modification Form</h2>
@@ -210,7 +210,7 @@
 
 
 
-    </form>
+ 
 </asp:Content>
 
 

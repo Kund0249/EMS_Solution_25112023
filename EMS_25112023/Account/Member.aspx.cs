@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Security;
+using System.Security.Cryptography;
 
 namespace EMS_25112023.Account
 {
@@ -15,10 +16,11 @@ namespace EMS_25112023.Account
         string CS = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
+
             CS = ConfigurationManager.ConnectionStrings["EmpDbCon"].ConnectionString;
             if (!IsPostBack)
             {
-                if(CheckUserExistance(out string UserId,out string Password))
+                if (CheckUserExistance(out string UserId, out string Password))
                 {
                     if (IsValidUser(UserId, Password))
                     {
@@ -74,16 +76,17 @@ namespace EMS_25112023.Account
 
         }
 
-
+        [Obsolete]
         private bool IsValidUser(string UserId, string password)
         {
+            string hashPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
             using (SqlConnection con = new SqlConnection(CS))
             {
                 SqlCommand cmd = new SqlCommand("spValidateUser", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@UserId", UserId);
-                cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@Password", hashPassword);
 
                 con.Open();
                 string statusmessage = (string)cmd.ExecuteScalar();
@@ -104,7 +107,7 @@ namespace EMS_25112023.Account
             cookie.Expires = DateTime.Now.AddDays(90);
             Response.Cookies.Add(cookie);
         }
-        private bool CheckUserExistance(out string UserId,out string Password)
+        private bool CheckUserExistance(out string UserId, out string Password)
         {
             UserId = null;
             Password = null;
@@ -118,6 +121,35 @@ namespace EMS_25112023.Account
             return false;
         }
 
-       
+        [Obsolete]
+        protected void btnRegister_Click(object sender, EventArgs e)
+        {
+            string UserID = txtemail.Text;
+            string password = TextBox2.Text;
+            string SecurePasswors = FormsAuthentication.HashPasswordForStoringInConfigFile(password, "SHA1");
+            using (SqlConnection con = new SqlConnection(CS))
+            {
+                SqlCommand cmd = new SqlCommand("spRegisterMember", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserId", UserID);
+                cmd.Parameters.AddWithValue("@password", SecurePasswors);
+
+                con.Open();
+                string statuscode = (string)cmd.ExecuteScalar();
+                con.Close();
+
+                string Message = string.Empty;
+                if (statuscode == "S001")
+                    Message = "toastr['success']('User Registered successfully!', 'Registreation Successfull')";
+                else if (statuscode == "RE01")
+                    Message = "toastr['warrning']('User already Registered, Please Login!', 'Already Registered')";
+                else
+                    Message = "toastr['error']('Currently system not able to process this request!', 'System Error')";
+
+                ClientScript.RegisterClientScriptBlock(this.GetType(), "M001", Message, true);
+
+            }
+        }
     }
 }

@@ -13,75 +13,100 @@
 
     <style>
         #MainContent {
-            min-height:500px;
+            min-height: 500px;
             max-height: 500px;
-            overflow:auto;
+            overflow: auto;
         }
     </style>
 </head>
 <body>
-    <%--  -----------------Menu------------------------%>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <form runat="server" id="MasterForm">
+        <%--  -----------------Menu------------------------%>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <asp:HyperLink runat="server"
+                                NavigateUrl="~/DepartmentContainer/AddDepartment.aspx"
+                                Text="Department"
+                                CssClass="nav-link active"></asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <%-- <a class="nav-link active" aria-current="page" href="#">Home</a>--%>
+                            <asp:HyperLink runat="server"
+                                NavigateUrl="~/EmployeeContainer/Employees.aspx"
+                                Text="Employee"
+                                CssClass="nav-link active"></asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink runat="server"
+                                NavigateUrl="~/EmployeeContainer/NewEmployee.aspx"
+                                Text="Add Employee"
+                                CssClass="nav-link active"></asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <asp:HyperLink runat="server"
+                                NavigateUrl="~/EmployeeContainer/Test.aspx"
+                                Text="Test"
+                                CssClass="nav-link active"></asp:HyperLink>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link active">
+                                <%
+                                    if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                    { 
+                                %>
+                                 <span>Welcome - </span>
+                                <% 
+                                    }
+                                %>
+                               
+                                <asp:LoginName runat="server" />
+                            </a>
+                        </li>
+                        <li class="nav-item">
+
+                            <asp:LoginStatus runat="server"
+                                LogoutPageUrl="~/Account/Member.aspx"
+                                CssClass="btn btn-primary btn-sm nav-link active"
+                                ForeColor="White"
+                                Font-Bold="true" />
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <%--  -----------------Middle Section------------------------%>
+
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                     <li class="nav-item">
-                        <asp:HyperLink runat="server"
-                            NavigateUrl="~/DepartmentContainer/AddDepartment.aspx"
-                            Text="Department"
-                            CssClass="nav-link active"></asp:HyperLink>
-                    </li>
-                    <li class="nav-item">
-                        <%-- <a class="nav-link active" aria-current="page" href="#">Home</a>--%>
-                        <asp:HyperLink runat="server"
-                            NavigateUrl="~/EmployeeContainer/Employees.aspx"
-                            Text="Employee"
-                            CssClass="nav-link active"></asp:HyperLink>
-                    </li>
-                    <li class="nav-item">
-                        <asp:HyperLink runat="server"
-                            NavigateUrl="~/EmployeeContainer/NewEmployee.aspx"
-                            Text="Add Employee"
-                            CssClass="nav-link active"></asp:HyperLink>
-                    </li>
-                    <li class="nav-item">
-                        <asp:HyperLink runat="server"
-                            NavigateUrl="~/EmployeeContainer/Test.aspx"
-                            Text="Test"
-                            CssClass="nav-link active"></asp:HyperLink>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+            <div class="row" id="MainContent">
+                <%--  -----------------Notice Board------------------------%>
+                <div id="NoticeBoard" class="col-2 bg-danger">
+                </div>
 
-    <%--  -----------------Middle Section------------------------%>
-
-    <div class="container-fluid">
-        <div class="row" id="MainContent">
-            <%--  -----------------Notice Board------------------------%>
-            <div id="NoticeBoard" class="col-2 bg-danger">
+                <%--  -----------------Content Page------------------------%>
+                <div id="ContentPage" class="col-10">
+                    <asp:ContentPlaceHolder ID="ChildPage" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
             </div>
 
-            <%--  -----------------Content Page------------------------%>
-            <div id="ContentPage" class="col-10">
-                <asp:ContentPlaceHolder ID="ChildPage" runat="server">
 
-                </asp:ContentPlaceHolder>
+        </div>
+        <%--  -----------------Footer------------------------%>
+        <div class="container-fluid">
+            <div class="row bg-dark" style="height: 51px;">
+                <h3 class="text-center" style="color: white">This is my footer</h3>
             </div>
         </div>
+    </form>
 
-
-    </div>
-    <%--  -----------------Footer------------------------%>
-    <div class="container-fluid">
-        <div class="row bg-dark" style="height: 51px;">
-            <h3 class="text-center" style="color: white">This is my footer</h3>
-        </div>
-    </div>
 </body>
 </html>

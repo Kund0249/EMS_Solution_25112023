@@ -6,7 +6,7 @@
 
 
 <asp:Content runat="server" ContentPlaceHolderID="ChildPage">
-    <form id="form1" runat="server">
+  
         <asp:GridView runat="server" ID="GridEmployee"
             AutoGenerateColumns="false"
             CssClass="table mt-5"
@@ -49,7 +49,7 @@
                 </asp:TemplateField>
             </Columns>
         </asp:GridView>
-    </form>
+
 </asp:Content>
 
 

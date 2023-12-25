@@ -8,7 +8,7 @@
     <link href="../CSS/bootstrap/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <form id="form1" runat="server">
+   
         <div class="row">
             <h1 style="background-color:antiquewhite">QuickXpert Infotech</h1>
         </div>
@@ -90,6 +90,6 @@
             </table>
         </div>
             </div>
-    </form>
+  
 </body>
 </html>
